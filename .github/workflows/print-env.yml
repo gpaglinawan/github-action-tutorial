@@ -5,11 +5,20 @@ on: [push, pull_request]
 jobs:
   print-env:
     runs-on: windows-latest
-    environment: dev
+    environment: dev  # Specifies the GitHub Environment
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Run PowerShell Script
+      - name: Print Environment Variables
         shell: pwsh
-        run: .\.github\scripts\print-env.ps1
+        run: |
+          Write-Output "Printing GitHub Environment Variables:"
+          Get-ChildItem -Path Env: | Sort-Object Name | ForEach-Object { Write-Output "$($_.Name) = $($_.Value)" }
+
+      - name: Print SAPI_ACCOUNT_ID
+        shell: pwsh
+        run: Write-Output "SAPI_KEY = $env:SAPI_ACCOUNT_ID"
+        env:
+          SAPI_KEY: ${{ vars.SAPI_ACCOUNT_ID }}  # Fetches from the 'dev' environment variables
+ 
