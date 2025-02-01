@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   print-env:
     runs-on: windows-latest
+    environment: dev
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
