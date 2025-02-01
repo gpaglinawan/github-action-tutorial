@@ -18,7 +18,7 @@ jobs:
 
       - name: Print SAPI_ACCOUNT_ID
         shell: pwsh
-        run: Write-Output "SAPI_KEY = $env:SAPI_ACCOUNT_ID"
+        run: Write-Output "SAPI_KEY = ${{vars.SAPI_ACCOUNT_ID}}"
         env:
           SAPI_KEY: ${{ vars.SAPI_ACCOUNT_ID }}  # Fetches from the 'dev' environment variables
  
