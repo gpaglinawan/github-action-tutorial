@@ -1,0 +1,14 @@
+name: Print GitHub Environment Variables
+
+on: [push, pull_request]
+
+jobs:
+  print-env:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run PowerShell Script
+        shell: pwsh
+        run: .\.github\scripts\print-env.ps1
